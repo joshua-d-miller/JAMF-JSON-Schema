@@ -1,0 +1,244 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+
+    "type": "object",
+    "title": "Managed Installs",
+
+    "properties": {
+        "AppleSoftwareUpdatesOnly": {
+            "type": "boolean",
+            "title": "Install Apple Updates Only",
+            "default": "false",
+            "description": "If true, only install updates from an Apple Software Update server. No Munki repository is needed or used."
+        },
+        "InstallAppleSoftwareUpdates": {
+            "type": "boolean",
+            "title": "Install Apple Software Updates",
+            "default": "true",
+            "description": "If true, install updates from an Apple Software Update server, in addition to \"regular\" Munki updates."
+        },
+        "UnattendedAppleUpdates": {
+            "type": "boolean",
+            "title": "Install Apple Updates without notification",
+            "default": "false",
+            "description": "If true, updates that declare no \"must-close\" applications, or have one or more \"must-close\" applications, none of which is running, and do not require a logout or restart will be installed as part of a normal periodic background run without notifying the user. (OS X 10.10+, Munki 2.5+)"
+        },
+        "SoftwareRepoURL": {
+            "type": "string",
+            "title": "URL Location of Munki Repo",
+            "default": "http://munki/repo",
+            "description": "Base URL for Munki repository"
+        },
+        "PackageURL": {
+            "type": "string",
+            "title": "URL Location of PKGs",
+            "default": "",
+            "description": "Base URL for Munki pkgs. Useful if your packages are served from a different server than your catalogs or manifests."
+        },
+        "CatalogURL": {
+            "type": "string",
+            "title": "URL Location of PKGs",
+            "default": "",
+            "description": "Base URL for Munki catalogs. Useful if your catalogs are served from a different server than your packages or manifests."
+        },
+        "ManifestURL": {
+            "type": "string",
+            "title": "URL Location of Manifests",
+            "default": "",
+            "description": "Base URL for Munki manifests. Useful if your manifests are served from a different server than your catalogs or manifests."
+        },
+        "IconURL": {
+            "type": "string",
+            "title": "URL Location of Icons",
+            "default": "",
+            "description": "Base URL for product icons. Useful if your icons are served from a different server or different directory than the default."
+        },
+        "ClientResourceURL": {
+            "type": "string",
+            "title": "URL Location of Client Resources",
+            "default": "",
+            "description": "Base URL for custom client resources for Managed Software Center. Useful if your resources are served from a different server or different directory than the default."
+        },
+        "ClientResourcesFilename": {
+            "type": "string",
+            "title": "Manifest name.zip or site_default.zip",
+            "default": "",
+            "description": "Specific filename to use when requesting custom client resources."
+        },
+        "HelpURL": {
+            "type": "string",
+            "title": "URL Location for Help",
+            "default": "",
+            "description": "If defined, a URL to open/display when the user selects \"Managed Software Center Help\" from Managed Software Center's Help menu."
+        },
+        "ClientIdentifier": {
+            "type": "string",
+            "title": "Location of Client Manifest",
+            "default": "$COMPUTERNAME",
+            "description": "Identifier for Munki client. Usually is the same as a manifest name on the Munki server. If this is empty or undefined, Munki will attempt the following identifiers, in order: fully-qualified hostname, \"short\" hostname, serial number and finally, \"site_default\""
+        },
+        "ManagedInstallDir": {
+            "type": "string",
+            "title": "Location of Managed Installs Dir",
+            "default": "/Library/Managed Installs",
+            "description": "Folder where Munki keeps its data on the client."
+        },
+        "LogFile": {
+            "type": "string",
+            "title": "Location of Log File",
+            "default": "/Library/Managed Installs/Logs/ManagedSoftwareUpdate.log",
+            "description": "Primary log is written to this file. Other logs are written into the same directory as this file."
+        },
+        "LogToSyslog": {
+            "type": "boolean",
+            "title": "Log Managed Software to System Log",
+            "default": "false",
+            "description": "If true, log to syslog in addition to ManagedSoftwareUpdate.log."
+        },
+        "LoggingLevel": {
+            "type": "integer",
+            "title": "Default logging level of Munki",
+            "default": "1",
+            "description": "Higher values cause more detail to be written to the primary log."
+        },
+        "DaysBeteweenNotifications": {
+            "type": "integer",
+            "title": "Days between notifications",
+            "default": 1,
+            "description": "Number of days between user notifications from Managed Software Center. Set to 0 to have Managed Software Center notify every time a background check runs if there are available updates."
+        },
+        "UseNotificationCenterDays": {
+            "type": "integer",
+            "title": "Days between notifications via notification center",
+            "default": 3,
+            "description": "(New in Munki 3) Number of days Notification Center notifications should be used before switching to launching Managed Software Center. See Notification Center Support."
+        },
+        "UseClientCertificate": {
+            "type": "boolean",
+            "title": "Use a client certificate for authentication",
+            "default": "false",
+            "description": "If true, use an SSL client certificate when communicating with the Munki server. Requires an https:// URL for the Munki repo. See ClientCertificatePath for details."
+        },
+        "UseClientCertificateCNAsClientIdentifier": {
+            "type": "boolean",
+            "title": "Use Client Certificate Common Name as Client Identifier",
+            "default": "false",
+            "description": "If true, use the CN of the client certificate as the Client Identifier.Used in combination with the UseClientCertificate key."
+        },
+        "SoftwareRepoCAPath": {
+            "type": "string",
+            "title": "Software Repo Certificate Authority Path",
+            "default": "",
+            "description": "Path to the directory that stores your CA certificate(s). See the curl man page for more details on this parameter."
+        },
+        "SoftwareRepoCACertificate": {
+            "type": "string",
+            "title": "Software Repo Certificate Authority File",
+            "default": "",
+            "description": "Absolute path to your CA Certificate."
+        },
+        "ClientCertificatePath": {
+            "type": "string",
+            "title": "Client Certificate Path",
+            "default": "/Library/Managed Installs/certs/[munki.pem|client.pem|cert.pem]",
+            "description": "Absolute path to a client certificate. There are 3 defaults for this key. Concatenated cert/key PEM file accepted."
+        },
+        "ClientKeyPath": {
+            "type": "string",
+            "title": "Client Certificate Private Key Path",
+            "default": "",
+            "description": "Absolute path to a client private key."
+        },
+        "AdditionalHttpHeaders": {
+            "type": "array",
+            "items": {"type": "string", "title": "Header"},
+            "title": "Additional HTTP Headers",
+            "default": [],
+            "description": "This key provides the ability to specify custom HTTP headers to be sent with all curl() HTTP requests. AdditionalHttpHeaders must be an array of strings with valid HTTP header format."
+        },
+        "PackageVerificationMode": {
+            "type": "string",
+            "title": "Munki PKG Verification Mode",
+            "default": "hash",
+            "description": "Controls how Munki verifies the integrity of downloaded packages. Possible values are: none: No integrity check is performed. hash: Integrity check is performed if package info contains checksum information. hash_strict: Integrity check is performed, and fails if package info does not contain checksum information."
+        },
+        "SuppressUserNotification": {
+            "type": "boolean",
+            "title": "Suppress User Notifications",
+            "default": "false",
+            "description": "If true, Managed Software Center will never notify the user of available updates. Managed Software Center can still be manually invoked to discover and install updates."
+        },
+        "SuppressAutoInstall": {
+            "type": "boolean",
+            "title": "Suppress Automatic Install",
+            "default": "false",
+            "description": "If true, Munki will not automatically install or remove items."
+        },
+        "SuppressLoginwindowInstall": {
+            "type": "boolean",
+            "title": "Suppress Login Window Install",
+            "default": "false",
+            "description": "If true, Munki will not install items while idle at the loginwindow except for those marked for unattended_install or unattended_uninstall."
+        },
+        "SuppressStopButtonOnInstall": {
+            "type": "boolean",
+            "title": "Suppress Stop Button On Install",
+            "default": "false",
+            "description": "If true, Managed Software Center will hide the stop button while installing or removing software, preventing users from interrupting the install."
+        },
+        "InstallRequiresLogout": {
+            "type": "boolean",
+            "title": "All Installs Require Logout",
+            "default": "false",
+            "description": "If true, Managed Software Center will require a logout for all installs or removals."
+        },
+        "MSULogEnabled": {
+            "type": "boolean",
+            "title": "Managed Software Center GUI Logging",
+            "default": "false",
+            "description": "Log user actions in the GUI. See [MSU-Logging]"
+        },
+        "MSUDebugLogEnabled": {
+            "type": "boolean",
+            "title": "Managed Software Center GUI Debug Logging",
+            "default": "false",
+            "description": "Debug logging for Managed Software Center. See [MSU-Logging]"
+        },
+        "LocalOnlyManifest": {
+            "type": "string",
+            "title": "Local Only Manifest",
+            "default": "",
+            "description": "Defines the name of your LocalOnlyManifest. Setting this activates the feature. Unsetting it means Munki will remove the file on the next run. See LocalOnlyManifest"
+        },
+        "FollowHTTPRedirects": {
+            "type": "string",
+            "title": "Follow HTTP Redirects",
+            "default": "",
+            "description": "Defines whether Munki will follow all, some or no redirects from the web server. See FollowHTTPRedirects"
+        },
+        "IgnoreSystemProxies": {
+            "type": "boolean",
+            "title": "Ignore System Proxies",
+            "default": "false",
+            "description": "If true, HTTP and/or HTTPS proxies set system-wide will be ignored, connections will be made directly."
+        },
+        "PerformAuthRestarts": {
+            "type": "boolean",
+            "title": "Perform Authorized Restarts",
+            "default": "false",
+            "description": "(New in Munki 3) If true, Munki will attempt to perform a filevault auth restart. See Authorized-Restarts."
+        },
+        "RecoveryKeyFile": {
+            "type": "string",
+            "title": "Recovery Key File Location",
+            "default": "",
+            "description": "(New in Munki 3) Absolute path to a plist file containing filevault credentials in key/value format. Used to perform auth restarts. See Authorized-Restarts."
+        },
+        "ShowOptionalInstallsForHigherOSVersions": {
+            "type": "boolean",
+            "title": "Recovery Key File Location",
+            "default": "false",
+            "description": "(New in Munki 3.1) If true, Managed Software Center.app will show optional installs and updates that apply to macOS versions higher than the currently installed version."
+        }
+    }
+}
